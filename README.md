@@ -66,6 +66,9 @@ GCP Radar uses **Application Default Credentials**, so the same binary works:
 - **keyless** on GKE via Workload Identity (recommended — nothing to rotate), or
 - with a mounted **service-account key** at `GOOGLE_APPLICATION_CREDENTIALS`.
 
+See [`docs/gcp-auth-setup.md`](docs/gcp-auth-setup.md) for the bare-minimum
+service-account + roles setup (copy-paste `gcloud` commands).
+
 ## GCP prerequisites (per monitored project)
 
 1. Enable the APIs: `cloudasset.googleapis.com`, `bigquery.googleapis.com`.
