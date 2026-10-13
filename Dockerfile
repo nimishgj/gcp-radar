@@ -1,6 +1,6 @@
 # Source-building image for local `make docker`. The release pipeline uses
 # Dockerfile.goreleaser with prebuilt binaries instead.
-FROM golang:1.24-alpine AS build
+FROM golang:1.27-alpine AS build
 
 WORKDIR /src
 
