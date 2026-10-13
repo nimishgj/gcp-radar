@@ -1,0 +1,19 @@
+# Runtime image for GoReleaser (dockers_v2) multi-platform builds.
+# dockers_v2 lays the prebuilt binaries out per-platform in the build context
+# ($TARGETPLATFORM/gcp-radar, e.g. linux/amd64/gcp-radar) and places
+# extra_files (config.yaml) at the context root. buildx sets TARGETPLATFORM per
+# target, so the correct-arch binary is copied for each platform.
+FROM alpine:3.24
+
+ARG TARGETPLATFORM
+
+RUN apk add --no-cache ca-certificates tzdata wget
+
+COPY $TARGETPLATFORM/gcp-radar /app/gcp-radar
+COPY config.yaml /app/config.yaml
+
+WORKDIR /app
+
+EXPOSE 9090
+
+ENTRYPOINT ["./gcp-radar"]

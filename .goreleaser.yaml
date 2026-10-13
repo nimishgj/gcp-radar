@@ -1,0 +1,97 @@
+# GoReleaser configuration for GCP Radar.
+# Docs: https://goreleaser.com
+version: 2
+
+project_name: gcp-radar
+
+before:
+  hooks:
+    - go mod download
+
+builds:
+  - id: gcp-radar
+    main: ./cmd/gcp-radar
+    binary: gcp-radar
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - darwin
+      - windows
+    goarch:
+      - amd64
+      - arm64
+    ignore:
+      # Windows on arm64 is uncommon for a server agent; skip it.
+      - goos: windows
+        goarch: arm64
+    mod_timestamp: "{{ .CommitTimestamp }}"
+    ldflags:
+      - -s -w
+      - -X main.version={{ .Version }}
+
+archives:
+  - id: gcp-radar
+    ids:
+      - gcp-radar
+    name_template: >-
+      {{ .ProjectName }}_{{ .Version }}_
+      {{- title .Os }}_
+      {{- if eq .Arch "amd64" }}x86_64
+      {{- else }}{{ .Arch }}{{ end }}
+    formats:
+      - tar.gz
+    format_overrides:
+      - goos: windows
+        formats:
+          - zip
+    files:
+      - README.md
+      - LICENSE
+      - config.yaml
+
+checksum:
+  name_template: "checksums.txt"
+  algorithm: sha256
+
+changelog:
+  sort: asc
+  use: git
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"
+      - "^chore:"
+      - "^ci:"
+      - "Merge pull request"
+      - "Merge branch"
+
+dockers_v2:
+  - id: gcp-radar
+    ids:
+      - gcp-radar
+    dockerfile: Dockerfile.goreleaser
+    images:
+      - "ghcr.io/nimishgj/gcp-radar"
+    tags:
+      - "{{ .Version }}"
+      - "{{ .Major }}.{{ .Minor }}"
+      - "latest"
+    platforms:
+      - linux/amd64
+      - linux/arm64
+    labels:
+      org.opencontainers.image.title: "{{ .ProjectName }}"
+      org.opencontainers.image.description: "GCP resource and cost monitoring agent"
+      org.opencontainers.image.version: "{{ .Version }}"
+      org.opencontainers.image.revision: "{{ .FullCommit }}"
+      org.opencontainers.image.source: "https://github.com/nimishgj/gcp-radar"
+      org.opencontainers.image.licenses: "Apache-2.0"
+    extra_files:
+      - config.yaml
+
+release:
+  github:
+    owner: nimishgj
+    name: gcp-radar
+  mode: replace

@@ -1,0 +1,12 @@
+version: "2"
+
+linters:
+  # The "standard" set: errcheck, govet, ineffassign, staticcheck, unused.
+  default: standard
+  exclusions:
+    rules:
+      # GCP client libraries deprecate fields/methods between releases; don't
+      # fail CI on every SDK bump.
+      - linters:
+          - staticcheck
+        text: "SA1019"
