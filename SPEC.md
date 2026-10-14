@@ -7,7 +7,7 @@ _2026-10-13_
 A GCP analog of [aws-radar](https://github.com/nimishgj/aws-radar): a lightweight
 Go agent that counts GCP resources and tracks month-to-date cost, exposes
 Prometheus metrics, ships as cross-platform binaries + a multi-arch image via
-GoReleaser, and deploys via Helm into the Scout observability stack.
+GoReleaser, and deploys via Helm into any observability stack.
 
 ## Key decisions
 
@@ -80,5 +80,5 @@ configure a billing export to BigQuery; bind Workload Identity for keyless auth.
 ## Out of scope (v1)
 
 - Multi-project / org-wide scanning (per-project only).
-- The Helm chart and Scout wiring (tracked as a follow-up).
+- The Helm chart and deployment wiring (tracked as a follow-up).
 - Cost allocation by label/tag (can be added as a further metric later).
