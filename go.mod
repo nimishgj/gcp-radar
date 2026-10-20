@@ -8,7 +8,7 @@ require (
 	github.com/prometheus/client_golang v1.25.0
 	github.com/rs/zerolog v1.35.1
 	github.com/spf13/viper v1.21.0
-	google.golang.org/api v0.302.0
+	google.golang.org/api v0.304.0
 )
 
 require (
