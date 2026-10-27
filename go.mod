@@ -3,12 +3,12 @@ module github.com/nimishgj/gcp-radar
 go 1.26.0
 
 require (
-	cloud.google.com/go/asset v1.29.0
-	cloud.google.com/go/bigquery v1.85.0
+	cloud.google.com/go/asset v1.30.0
+	cloud.google.com/go/bigquery v1.86.0
 	github.com/prometheus/client_golang v1.25.0
 	github.com/rs/zerolog v1.35.1
 	github.com/spf13/viper v1.21.0
-	google.golang.org/api v0.302.0
+	google.golang.org/api v0.308.0
 )
 
 require (
@@ -74,7 +74,7 @@ require (
 	golang.org/x/xerrors v0.0.0-20240903120638-7835f813f4da // indirect
 	google.golang.org/genproto v0.0.0-20260715232425-e75dac1f907d // indirect
 	google.golang.org/genproto/googleapis/api v0.0.0-20260715232425-e75dac1f907d // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20261005182115-fad411399dd8 // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20261019180522-ce908d29299b // indirect
 	google.golang.org/grpc v1.84.0 // indirect
 	google.golang.org/protobuf v1.36.12 // indirect
 )
